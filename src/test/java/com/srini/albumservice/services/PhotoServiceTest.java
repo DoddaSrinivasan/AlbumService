@@ -21,18 +21,21 @@ public class PhotoServiceTest {
     private PhotosRepository photosRepository;
 
     @Mock
+    private PhotoStorageService photoStorageService;
+
+    @Mock
     private BufferedImage bufferedImage;
 
     private PhotoService photoService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         initMocks(this);
-        photoService = new PhotoService(photosRepository);
+        photoService = new PhotoService(photosRepository, photoStorageService);
     }
 
     @Test
-    public void shouldAddPhotoWithNewId() {
+    public void shouldAddPhotoWithNewId()throws Exception {
         when(bufferedImage.getWidth()).thenReturn(100);
         when(bufferedImage.getHeight()).thenReturn(200);
 
@@ -42,5 +45,12 @@ public class PhotoServiceTest {
         assertThat(savedPhoto.getWidth(), is(100));
         assertThat(savedPhoto.getHeight(), is(200));
         verify(photosRepository).save(savedPhoto);
+    }
+
+    @Test
+    public void shouldSaveBufferedImage() throws Exception {
+        Photo savedPhoto = photoService.addPhoto(bufferedImage);
+
+        verify(photoStorageService).storeFile(bufferedImage, savedPhoto.getPhotoId());
     }
 }

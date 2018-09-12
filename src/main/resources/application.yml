@@ -1,10 +1,14 @@
 ---
+file:
+  uploadDir: ./AlbumServicePhotos
 spring:
   data:
     mongodb.uri: mongodb://localhost/srini
     mongodb.authentication-database: srini
     mongo.repositories.enabled: true
 ---
+file:
+  uploadDir: ./TestAlbumServicePhotos
 spring:
   profiles: test
   data:

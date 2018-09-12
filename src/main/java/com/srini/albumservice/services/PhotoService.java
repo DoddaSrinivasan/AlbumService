@@ -12,18 +12,21 @@ import java.awt.image.BufferedImage;
 public class PhotoService {
 
     private PhotosRepository photosRepository;
+    private PhotoStorageService photoStorageService;
 
     @Autowired
-    public PhotoService(PhotosRepository photosRepository) {
+    public PhotoService(PhotosRepository photosRepository, PhotoStorageService photoStorageService) {
         this.photosRepository = photosRepository;
+        this.photoStorageService = photoStorageService;
     }
 
-    public Photo addPhoto(BufferedImage image) {
+    public Photo addPhoto(BufferedImage image) throws Exception {
         String photoId = IdGenerator.generateNewId();
         int width = image.getWidth();
         int height = image.getHeight();
         Photo photo = new Photo(photoId, width, height);
 
+        photoStorageService.storeFile(image, photoId);
         photosRepository.save(photo);
 
         return photo;
