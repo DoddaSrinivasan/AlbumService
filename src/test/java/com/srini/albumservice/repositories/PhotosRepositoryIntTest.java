@@ -30,7 +30,7 @@ public class PhotosRepositoryIntTest {
 
     @Test
     public void shouldSavePhoto() {
-        Photo photo = new Photo("id", "photoId");
+        Photo photo = new Photo("photoId", 10, 10);
         photosRepository.save(photo);
 
         List<Photo> photoList = photosRepository.findAll();

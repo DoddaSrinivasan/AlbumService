@@ -1,6 +1,5 @@
 package com.srini.albumservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,23 +8,42 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection = Photo.COLLECTION_NAME)
 public class Photo {
 
-    public static final String COLLECTION_NAME = "as.photo";
+    static final String COLLECTION_NAME = "as.photo";
 
-    public static final String ID = "id";
-    public static final String PHOTO_ID = "photoId";
-
+    private static final String PHOTO_ID = "photoId";
+    private static final String WIDTH = "width";
+    private static final String HEIGHT = "height";
 
     @Id
-    @JsonIgnore
-    @Field(ID)
-    String id;
+    private String id;
 
     @JsonProperty
     @Field(PHOTO_ID)
     String photoId;
 
-    public Photo(String id, String photoId) {
-        this.id = id;
+    @JsonProperty
+    @Field(WIDTH)
+    int width;
+
+    @JsonProperty
+    @Field(HEIGHT)
+    int height;
+
+    public Photo(String photoId, int width, int height) {
         this.photoId = photoId;
+        this.width = width;
+        this.height = height;
+    }
+
+    public String getPhotoId() {
+        return photoId;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
