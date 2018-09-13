@@ -1,5 +1,6 @@
 package com.srini.albumservice.exception;
 
+import com.srini.albumservice.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class DefaultExceptionHandler {
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity validationExceptionHandler(ValidationException exception) {
         LOGGER.error("Encountered an exception while processing request");
-        return new ResponseEntity<>(exception.getError(), OK);
+        return new ResponseEntity(Response.withError(exception.getError()), OK);
     }
 
 }

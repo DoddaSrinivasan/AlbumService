@@ -55,7 +55,7 @@ public class PhotoControllerIntTest {
                 .andReturn();
 
         String responseBody = restlt.getResponse().getContentAsString();
-        String message = JsonPath.read(responseBody, "$.message");
+        String message = JsonPath.read(responseBody, "$.error.message");
         assertThat(message, is("Invalid File Type. Only Image is valid"));
 
     }
