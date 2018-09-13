@@ -1,6 +1,8 @@
 package com.srini.albumservice.services;
 
 import com.srini.albumservice.configurations.FileStorageProperties;
+import com.srini.albumservice.exception.ValidationException;
+import com.srini.albumservice.response.Error;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +35,7 @@ class PhotoStorageService {
         try {
             ImageIO.write(bufferedImage, "png", targetLocation.toFile());
         } catch (IOException e) {
-            throw new RuntimeException("Could not save image. Try again later.");
+            throw new ValidationException(new Error("Could not save image. Try again later."));
         }
     }
 
