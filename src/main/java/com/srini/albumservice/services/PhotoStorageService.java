@@ -6,17 +6,18 @@ import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
-public class PhotoStorageService {
+class PhotoStorageService {
 
     private final Path fileStorageLocation;
 
     @Autowired
-    public PhotoStorageService(FileStorageProperties fileStorageProperties) {
+    PhotoStorageService(FileStorageProperties fileStorageProperties) {
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir()).toAbsolutePath().normalize();
 
         try {
@@ -26,10 +27,14 @@ public class PhotoStorageService {
         }
     }
 
-    public void storeFile(BufferedImage bufferedImage, String photoId) throws Exception {
+    void storeFile(BufferedImage bufferedImage, String photoId) {
         String fileName = photoId+".png";
         Path targetLocation = this.fileStorageLocation.resolve(fileName);
-        ImageIO.write(bufferedImage, "png", targetLocation.toFile());
+        try {
+            ImageIO.write(bufferedImage, "png", targetLocation.toFile());
+        } catch (IOException e) {
+            throw new RuntimeException("Could not save image. Try again later.");
+        }
     }
 
 }

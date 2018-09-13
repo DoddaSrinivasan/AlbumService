@@ -15,12 +15,12 @@ public class PhotoService {
     private PhotoStorageService photoStorageService;
 
     @Autowired
-    public PhotoService(PhotosRepository photosRepository, PhotoStorageService photoStorageService) {
+    PhotoService(PhotosRepository photosRepository, PhotoStorageService photoStorageService) {
         this.photosRepository = photosRepository;
         this.photoStorageService = photoStorageService;
     }
 
-    public Photo addPhoto(BufferedImage image) throws Exception {
+    public Photo addPhoto(BufferedImage image) {
         String photoId = IdGenerator.generateNewId();
         int width = image.getWidth();
         int height = image.getHeight();
