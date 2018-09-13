@@ -12,6 +12,6 @@ file:
 spring:
   profiles: test
   data:
-    mongodb.uri: mongodb://localhost/srini
+    mongodb.uri: mongodb://localhost/srini-test
     mongodb.authentication-database: srini-test
     mongo.repositories.enabled: true

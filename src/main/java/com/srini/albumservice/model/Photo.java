@@ -19,15 +19,15 @@ public class Photo {
 
     @JsonProperty
     @Field(PHOTO_ID)
-    String photoId;
+    private String photoId;
 
     @JsonProperty
     @Field(WIDTH)
-    int width;
+    private int width;
 
     @JsonProperty
     @Field(HEIGHT)
-    int height;
+    private int height;
 
     public Photo(String photoId, int width, int height) {
         this.photoId = photoId;
