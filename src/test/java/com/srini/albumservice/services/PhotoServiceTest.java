@@ -1,16 +1,17 @@
 package com.srini.albumservice.services;
 
 import com.srini.albumservice.model.Photo;
+import com.srini.albumservice.model.Photos;
 import com.srini.albumservice.repositories.PhotosRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
 import java.awt.image.BufferedImage;
+import java.util.Collections;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -52,5 +53,16 @@ public class PhotoServiceTest {
         Photo savedPhoto = photoService.addPhoto(bufferedImage);
 
         verify(photoStorageService).storeFile(bufferedImage, savedPhoto.getPhotoId());
+    }
+
+    @Test
+    public void shouldGetAllPhotosFromRepository() {
+        Photo photo = new Photo("PhotoId", 100, 200);
+        when(photosRepository.findAll()).thenReturn(Collections.singletonList(photo));
+
+        Photos photos = photoService.allPhotos();
+
+        assertEquals(photos.size(),1);
+        verify(photosRepository).findAll();
     }
 }

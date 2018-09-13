@@ -2,12 +2,16 @@ package com.srini.albumservice.controllers;
 
 import com.srini.albumservice.exception.ValidationException;
 import com.srini.albumservice.model.Photo;
+import com.srini.albumservice.model.Photos;
 import com.srini.albumservice.response.Error;
 import com.srini.albumservice.response.Response;
 import com.srini.albumservice.services.PhotoService;
 import com.srini.albumservice.validators.ImageFileValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -37,5 +41,11 @@ class PhotoController {
         } catch (IOException e) {
             throw new ValidationException(new Error("Could not read the Image"));
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    Response<Photos> getPhotos() {
+        Photos photos = photoService.allPhotos();
+        return Response.withContent(photos);
     }
 }

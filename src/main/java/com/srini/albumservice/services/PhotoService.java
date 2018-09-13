@@ -2,6 +2,7 @@ package com.srini.albumservice.services;
 
 import com.srini.albumservice.generators.IdGenerator;
 import com.srini.albumservice.model.Photo;
+import com.srini.albumservice.model.Photos;
 import com.srini.albumservice.repositories.PhotosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,5 +31,9 @@ public class PhotoService {
         photosRepository.save(photo);
 
         return photo;
+    }
+
+    public Photos allPhotos() {
+        return new Photos(photosRepository.findAll());
     }
 }
