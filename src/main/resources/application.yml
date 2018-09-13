@@ -1,17 +1,26 @@
 ---
-file:
-  uploadDir: /etc/images
 spring:
   data:
     mongodb.uri: mongodb://localhost/srini
     mongodb.authentication-database: srini
     mongo.repositories.enabled: true
----
 file:
-  uploadDir: /etc/test-images
+  uploadDir: /etc/images
+---
+spring:
+  profiles: docker
+  data:
+    mongodb.uri: mongodb://mongo/srini
+    mongodb.authentication-database: srini
+    mongo.repositories.enabled: true
+file:
+  uploadDir: /etc/images
+---
 spring:
   profiles: test
   data:
     mongodb.uri: mongodb://localhost/srini-test
     mongodb.authentication-database: srini-test
     mongo.repositories.enabled: true
+file:
+  uploadDir: /etc/test-images
