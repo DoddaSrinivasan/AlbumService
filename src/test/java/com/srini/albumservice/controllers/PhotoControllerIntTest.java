@@ -49,14 +49,13 @@ public class PhotoControllerIntTest {
     public void shouldValidateFileContentType() throws Exception {
         MockMultipartFile file = new MockMultipartFile("file", "filename.txt", "text/plain", "some xml".getBytes());
 
-        MvcResult restlt = mockMvc.perform(MockMvcRequestBuilders.multipart("/photos")
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.multipart("/photos")
                 .file(file))
                 .andExpect(status().isOk())
                 .andReturn();
 
-        String responseBody = restlt.getResponse().getContentAsString();
+        String responseBody = result.getResponse().getContentAsString();
         String message = JsonPath.read(responseBody, "$.error.message");
         assertThat(message, is("Invalid File Type. Only Image is valid"));
-
     }
 }

@@ -1,6 +1,7 @@
 package com.srini.albumservice.services;
 
 import com.srini.albumservice.configurations.FileStorageProperties;
+import com.srini.albumservice.exception.FileNotFoundException;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -8,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -15,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 
@@ -45,13 +48,27 @@ public class PhotoStorageServiceIntTest {
         assertTrue(fileExists);
     }
 
+    @Test
+    public void shouldRetrieveSavedImage() {
+        photoStorageService.storeFile(getBufferedImage(), "PhotoId");
+
+        Resource resource = photoStorageService.loadFileAsResource("PhotoId.png");
+
+        assertNotNull(resource);
+    }
+
+    @Test(expected = FileNotFoundException.class)
+    public void shouldThrowFileNotFound() {
+        photoStorageService.loadFileAsResource("PhotoId.png");
+    }
+
     @After
     public void teardown() throws Exception{
         deleteTestPhotos();
     }
 
     private void deleteTestPhotos() throws Exception {
-        FileUtils.deleteDirectory(fileStorageLocation.toFile());
+        FileUtils.cleanDirectory(fileStorageLocation.toFile());
     }
 
     private BufferedImage getBufferedImage() {

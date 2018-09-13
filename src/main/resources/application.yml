@@ -1,6 +1,6 @@
 ---
 file:
-  uploadDir: ./AlbumServicePhotos
+  uploadDir: /etc/images
 spring:
   data:
     mongodb.uri: mongodb://localhost/srini
@@ -8,7 +8,7 @@ spring:
     mongo.repositories.enabled: true
 ---
 file:
-  uploadDir: ./TestAlbumServicePhotos
+  uploadDir: /etc/test-images
 spring:
   profiles: test
   data:
