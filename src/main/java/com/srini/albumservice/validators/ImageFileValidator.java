@@ -10,7 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImageFileValidator {
 
     @Autowired
-    ImageFileValidator() { }
+    ImageFileValidator() {
+    }
 
     public void validate(MultipartFile multipartFile) {
         String contentType = multipartFile.getContentType();

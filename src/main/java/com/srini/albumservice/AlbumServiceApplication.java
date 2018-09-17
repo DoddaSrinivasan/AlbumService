@@ -7,12 +7,12 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @SpringBootApplication
 @EnableConfigurationProperties({
-		FileStorageProperties.class
+        FileStorageProperties.class
 })
 public class AlbumServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AlbumServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AlbumServiceApplication.class, args);
+    }
 
 }

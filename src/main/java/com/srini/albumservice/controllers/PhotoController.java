@@ -36,7 +36,7 @@ class PhotoController {
         imageFileValidator.validate(file);
         try {
             BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
-            Photo photo =photoService.addPhoto(bufferedImage);
+            Photo photo = photoService.addPhoto(bufferedImage);
             return Response.withContent(photo);
         } catch (IOException e) {
             throw new ValidationException(new Error("Could not read the Image"));

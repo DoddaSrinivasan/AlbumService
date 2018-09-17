@@ -12,7 +12,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 @RequestMapping(value = "/images")
-public class ImagesController {
+class ImagesController {
 
     private PhotoStorageService photoStorageService;
 

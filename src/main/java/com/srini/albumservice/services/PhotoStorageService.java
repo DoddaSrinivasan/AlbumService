@@ -33,7 +33,7 @@ public class PhotoStorageService {
     }
 
     void storeFile(BufferedImage bufferedImage, String photoId) {
-        String fileName = photoId+".png";
+        String fileName = photoId + ".png";
         Path targetLocation = this.fileStorageLocation.resolve(fileName);
         try {
             ImageIO.write(bufferedImage, "png", targetLocation.toFile());
@@ -46,7 +46,7 @@ public class PhotoStorageService {
         try {
             Path filePath = this.fileStorageLocation.resolve(imageName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
-            if(resource.exists()) {
+            if (resource.exists()) {
                 return resource;
             } else {
                 throw new FileNotFoundException("File not found " + imageName);

@@ -4,6 +4,10 @@ spring:
     mongodb.uri: mongodb://localhost/srini
     mongodb.authentication-database: srini
     mongo.repositories.enabled: true
+  servlet:
+    multipart:
+      max-file-size: 128MB
+      max-request-size: 128MB
 file:
   uploadDir: /etc/images
 ---

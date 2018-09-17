@@ -9,5 +9,7 @@ public class Photos extends ArrayList<Photo> {
 
     }
 
-    public Photos(Collection<? extends Photo> c) { super(c); }
+    public Photos(Collection<? extends Photo> c) {
+        super(c);
+    }
 }
