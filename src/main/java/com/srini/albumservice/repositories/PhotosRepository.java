@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface PhotosRepository extends MongoRepository<Photo, String> {
 
-    void deleteByPhotoIdIn(List<String> photoIds);
+    List <Photo> deleteByPhotoIdIn(List<String> photoIds);
 
 }

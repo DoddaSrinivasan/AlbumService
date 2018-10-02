@@ -15,7 +15,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -60,9 +62,12 @@ public class PhotoControllerTest {
 
     @Test
     public void shouldDeletePhotos() {
+        Photo photo = new Photo("PhotoId", 100, 200);
         List<String> photoIds = Arrays.asList("1", "2");
-        photoController.deletePhotos(photoIds);
+        when(photoService.delete(photoIds)).thenReturn(Collections.singletonList(photo));
+        List<Photo> deletedPhotos = photoController.deletePhotos(photoIds).getContent();
 
+        assertThat(deletedPhotos.size() , is(1));
         verify(photoService).delete(photoIds);
     }
 }

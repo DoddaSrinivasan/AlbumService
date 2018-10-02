@@ -70,7 +70,9 @@ public class PhotoServiceTest {
 
     @Test
     public void shouldDeletePhotosFromRepository() {
+        Photo photo = new Photo("PhotoId", 100, 200);
         List<String> photoIds = Arrays.asList("1", "2");
+        when(photoService.delete(photoIds)).thenReturn(Collections.singletonList(photo));
         photoService.delete(photoIds);
 
         verify(photosRepository).deleteByPhotoIdIn(photoIds);

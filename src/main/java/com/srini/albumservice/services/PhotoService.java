@@ -38,7 +38,7 @@ public class PhotoService {
         return new Photos(photosRepository.findAll());
     }
 
-    public void delete(List<String> photoIds) {
-        photosRepository.deleteByPhotoIdIn(photoIds);
+    public List <Photo> delete(List<String> photoIds) {
+        return photosRepository.deleteByPhotoIdIn(photoIds);
     }
 }
