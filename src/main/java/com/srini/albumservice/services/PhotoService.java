@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 @Service
 public class PhotoService {
@@ -35,5 +36,9 @@ public class PhotoService {
 
     public Photos allPhotos() {
         return new Photos(photosRepository.findAll());
+    }
+
+    public void delete(List<String> photoIds) {
+        photosRepository.deleteByPhotoIdIn(photoIds);
     }
 }

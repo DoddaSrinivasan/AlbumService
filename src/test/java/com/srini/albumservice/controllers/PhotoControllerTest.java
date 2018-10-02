@@ -11,7 +11,9 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.mock.web.MockMultipartFile;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -54,5 +56,13 @@ public class PhotoControllerTest {
 
         assertEquals(photosResponse.getContent().size(),1);
         verify(photoService).allPhotos();
+    }
+
+    @Test
+    public void shouldDeletePhotos() {
+        List<String> photoIds = Arrays.asList("1", "2");
+        photoController.deletePhotos(photoIds);
+
+        verify(photoService).delete(photoIds);
     }
 }

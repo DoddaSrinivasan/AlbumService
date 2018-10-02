@@ -8,7 +8,9 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -64,5 +66,13 @@ public class PhotoServiceTest {
 
         assertEquals(photos.size(),1);
         verify(photosRepository).findAll();
+    }
+
+    @Test
+    public void shouldDeletePhotosFromRepository() {
+        List<String> photoIds = Arrays.asList("1", "2");
+        photoService.delete(photoIds);
+
+        verify(photosRepository).deleteByPhotoIdIn(photoIds);
     }
 }
